@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=visibility"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      section {
+        margin: 10px 0;
+      }
+      .area-interactiva,
+      .info-esdeveniments {
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 6px;
+      }
+      .info-esdeveniments {
+        background-color: #f3f0fa;
+        font-size: 0.9em;
+        color: #333;
+      }
+      button {
+        background-color: #d9f5ec;
+        border: none;
+        padding: 6px 12px;
+        margin-right: 5px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #bde9db;
+      }
+      input {
+        padding: 5px;
+        margin-left: 5px;
+      }
+      #icon-eye {
+        cursor: pointer;
+        vertical-align: middle;
+        margin-left: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section id="inter-area" class="area-interactiva">
+        <p>Àrea Interactiva - Mou el ratolí per aquí!</p>
+      </section>
+      <section>
+        <button id="double-button">Fes doble click!!</button>
+        <input id="input-text" type="text" placeholder="Escriu alguna cosa" />
+        <span id="icon-eye" class="material-symbols-outlined">visibility</span>
+      </section>
+      <section>
+        <button id="mostra">mostra</button>
+        <button id="amaga">amaga</button>
+      </section>
+      <section class="info-esdeveniments" id="text-section">
+        <!-- Aquí posarem tots els events que hem seleccionat. -->
+      </section>
+    </main>
+    <script>
+      let boton_double = document.getElementById("double-button");
+      let input_text = document.getElementById("input-text");
+      let visibility = document.getElementById("icon-eye");
+      let mostra = document.getElementById("mostra");
+      let amaga = document.getElementById("amaga");
+      let area = document.getElementById("inter-area");
+      let text_section = document.getElementById("text-section");
+
+      function addText(text){
+        text_section.insertAdjacentHTML("beforeend", text)
+      }
+      boton_double.addEventListener("dblclick", () => {
+        alert("Has fet doble clic el botó!");
+        addText("Has fet doble clic el botó!<br>")
+      });
+      visibility.addEventListener("click", () => {
+        alert("Has fet clic l'ull!");        
+        addText("Has fet clic l'ull!<br>")
+      });
+      input_text.addEventListener("input", (e) => {
+        alert(`El valor ha cambiar a: ${e.target.value}`);
+        addText(`El valor ha cambiar a: ${e.target.value}<br>`)
+      });
+      input_text.addEventListener("keydown", (e) => {
+        if (e.key == "Escape") {
+          alert("No pots utilitzar la tecla Escape dins del formulari!");
+          addText("No pots utilitzar la tecla Escape dins del formulari!<br>")
+        }
+      });
+      area.addEventListener("mousemove", () => {
+        alert("Estàs sobre l'àrea interactiva!");
+        addText("Estàs sobre l'àrea interactiva!<br>")
+      });
+      mostra.addEventListener("click", () => {
+        text_section.hidden = false;
+      });
+      amaga.addEventListener("click", () => {
+        text_section.hidden = true;
+      });
+      /*
+           
+            DEFINIR ELS ELEMENTS QUE VOLEM INTERACCIONAR
+           <POSA EL CODI AQUÍ>>    
+
+
+           // 1. Esdeveniment pel BOTO "Fes doble click!!""
+           // Afegir un event que al fer doble clic el botó Clica'm mostri una alerta 'Has fet doble clic el botó!'.
+           // Ha d'afegir el missatge 'Has fet doble clic el botó!' a info-esdeveniments que acabi amb <br>. S'ha de fer servir insertAdjacent...
+       
+           <POSA EL CODI AQUÍ>>
+
+
+           ------------------------------------------------------------------------------------------------
+           // 2. Esdeveniment per la ICONA "eye"
+           // Afegir un event que al fer clic sobre l'ull mostri una alerta 'Has fet clic a l\'ull!'.
+           // Ha d'afegir el missatge 'Has fet clic a l\'ull!' a info-esdeveniments que acabi amb <br>. S'ha de fer servir insertAdjacent...
+         
+           <<POSA EL CODI AQUÍ>>
+
+
+           ------------------------------------------------------------------------------------------------
+           // 3. Esdeveniment per INPUT
+           // Afegir un event a l'input per tal que quan canvii el valor de l'input mostri una alerta 'El valor ha canviat a: ...'
+           // S'ha de fer servir l'event: input i s'ha d'utilitzar event.target.value per mostrar el valor
+           // Ha d'afegir el missatge 'El valor ha canviat a: nou valor' a info-esdeveniments que acabi amb <br>. S'ha de fer servir insertAdjacent...
+
+
+           <<POSA EL CODI AQUÍ>>
+
+
+           // Afegir un event a l'input que al pulsar la tecla 'escape' mostri una alerta 'No pots utilitzar la tecla Escape dins del formulari!'.
+           // S'ha de fer servir l'event: keydown i s'ha d'utilitzar event.key
+           // Ha d'afegir el missatge 'No pots utilitzar la tecla Escape aquí!' a info-esdeveniments que acabi amb <br>. S'ha de fer servir insertAdjacent...
+
+
+           <<POSA EL CODI AQUÍ>>
+
+
+
+
+           ------------------------------------------------------------------------------------------------
+           // 4. Esdeveniment a la secció area-interactiva
+           // Afegir un event a la secció area-interactiva que al passar el ratolí per sobre mostri una alerta 'Estàs sobre l\'àrea interactiva!'
+           // Ha d'afegir el missatge 'Estàs sobre l\'àrea interactiva!' a info-esdeveniments que acabi amb <br>. S'ha de fer servir insertAdjacent...
+         
+           <<POSA EL CODI AQUÍ>>
+
+
+
+
+           ------------------------------------------------------------------------------------------------
+           // 5. Esdeveniments als botons mostrar/ocultar
+           // Afegir un event al botó 'mostra' que al passar el ratolí per sobre mostri l'apartat 'area-interactiva'
+           // Afegir un event al botó 'ocultar' que al passar el ratolí per sobre oculti l'apartat 'area-interactiva'
+
+
+           */
+    </script>
+  </body>
+</html>

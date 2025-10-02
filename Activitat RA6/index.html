@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <title>Activitat Classes CSS</title>
+    <style>
+        /* CLASSES PER L'ACTIVITAT 1 - AFEGIR CLASSES */
+        .caixa-afegir {
+            width: 200px;
+            height: 100px;
+            margin: 10px;
+            padding: 20px;
+            border: 2px solid #28a745;
+            background-color: #d4edda;
+            transition: all 0.3s ease;
+        }
+       
+        .text-verd {
+            color: #155724;
+        }
+               
+        .rotacio {
+            transform: rotate(3deg);
+        }
+       
+        .marge {
+            margin: 20px;
+            padding: 30px;
+        }
+       
+        .marge-radius {
+            border-radius: 20px;
+        }
+
+
+        /* CLASSES PER L'ACTIVITAT 2 - TOGGLE */
+        .caixa-toggle {
+            width: 200px;
+            height: 100px;
+            margin: 10px;
+            padding: 20px;
+            border: 2px solid #666;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+       
+        .activa {
+            background-color: #6a11cb;
+            color: white;
+            border-color: #4d089a;
+            box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
+            transform: translateY(-5px);
+        }
+
+
+        /* CLASSES PER L'ACTIVITAT 3 - CANVIAR CLASSES */
+        .estat-1 {
+            background-color: #ff6b6b;
+            border-radius: 10px;
+            width: 200px;
+            height: 100px;
+            margin: 10px;
+            padding: 20px;
+            border: 2px solid #333;
+        }
+       
+        .estat-2 {
+            background-color: #4ecdc4;
+            border-radius: 10px;
+            transform: rotate(-5deg);
+            width: 200px;
+            height: 100px;
+            margin: 10px;
+            padding: 20px;
+            border: 2px solid #333;
+        }
+       
+        .estat-3 {
+            background-color: #ffe66d;
+            border-radius: 10px;
+            transform: rotate(10deg);
+            width: 200px;
+            height: 100px;
+            margin: 10px;
+            padding: 20px;
+            border: 2px solid #333;
+        }
+       
+        .estat-4 {
+            background-color: #95e1d3;
+            border-radius: 10px;
+            transform: rotate(-10deg);
+            width: 200px;
+            height: 100px;
+            margin: 10px;
+            padding: 20px;
+            border: 2px solid #333;
+        }
+   
+        /* Estils generals */
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+       
+        .activitat {
+            border: 2px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+       
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+       
+        button:hover {
+            opacity: 0.9;
+        }
+       
+        button{
+            background-color: #007bff;
+            color: white;
+        }
+         
+       
+        .info-estat {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+       
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+
+
+         <!-- ACTIVITAT 1: AFEGIR -->
+         <section class="activitat">
+            <h2>1. Afegir Classes</h2>
+            <div class="info-estat">
+                <p>Cada vegada que es pulsa un dels botons s'aplicarà l'estil relacionat al botó a l'element Caixa Afegir. </p>
+                <p>A mesura que es van pulsant els botons s'aniran mantenint les classes que ja s'estan aplicant.</p>
+                <p>Al pulsar el botó 'Eliminar tot' es deixaran d'aplicar tots els estils.</p>
+                <p>La relació dels botons amb les classes de CSS son: <br>
+                    'Afegir Text Verd' -> text-verd <br>
+                    'Afegir Rotació' -> rotacio <br>
+                    'Afegir Marge' -> marge <br>
+                    'Afegir Radius' -> marge-radius <br>
+                </p>
+                <p>Per fer aquesta activitat s'ha d'utilitzar els mètodes add i remove.</p>
+            </div>
+            <div id="caixa-afegir" class="caixa-afegir">
+                Caixa Afegir
+            </div>    
+            <button id="afegir-verd">Afegir Text Verd</button>
+            <button id="afegir-rotacio">Afegir Rotació</button>
+            <button id="afegir-marge">Afegir Marge</button>
+            <button id="afegir-borda">Afegir Radius</button>
+            <button id="reset-afegir">Eliminar Tot</button>  
+        </section>
+
+
+        <!-- ACTIVITAT 1: TOGGLE -->
+          <section class="activitat">
+            <h2>2. Toggle de Classes</h2>
+            <div class="info-estat">
+                <p>Cada vegada que es pula el botó 'Aplica/treu CSS' anirà commutant entre aplica o treure la classes 'activa' al div 'Caixa toggle'</p>
+                <p>Per defecte no té aplicada la classe 'activa' </p>
+                <p>Proposta de millora: Canviar el text del botó cada vegada que es pulsa. Si s'aplica l'estil 'activa' el text del botó canvia a 'Treu CSS', en cas contrari el text serà 'Aplica CSS'.</p>
+                <p>Per fer aquesta activitat s'ha d'utilitzar el mètode toggle. En la proposta de millora necessitareu utilitzar el mètode contains per saber si s'aplica el css i la propietat textContent per canviar el text del botó.</p>
+            </div>            
+            <div id="caixa-toggle" class="caixa-toggle">
+                Caixa Toggle
+            </div>          
+            <button id="toggle-activa" class="boto-toggle">Aplica/treu CSS</button>                      
+        </section>
+               
+        <!-- ACTIVITAT 3: CICLIC -->
+        <section class="activitat">
+            <h2>3. Canvi de Classes CSS</h2>
+            <div class="info-estat">
+                <p>Cada vegada que es pulsa el botó 'Canvia classe CSS' se li haurà d'aplicar al div 'Caixa Ciclica' una nova classe CSS</p>
+                <p>Per defecte té la classe estat-1, al clicar el botó se li aplicarà la classe estat-2 i l'estat-1 deixarà d'aplicar-se, igualment passarà amb l'estat-3 i finalment amb l'estat-4</p>
+                <p>Quan el div 'Caixa Ciclica' té la classe estat-4 i es pulsa el botó tornarà a aplicat la classe estat-1 i l'estat-4 deixarà d'aplicar-se.</p>
+                <p>Les classes d'estils per aquesta activitat son: .estat-1, .estat-2, .estat-3 i .estat-4 </p>
+                <p>S'ha d'anar mostrant l'estat actual a través d'un number</p>
+                <p>Per fer aquesta activitat s'ha d'utilitzar els mètodes add i remove.</p>
+            </div>                
+            <div id="caixa-canvi-estat" class="estat-1">Caixa Ciclica</div>          
+            <button id="boto-canvi-classe" class="boto-ciclic">Canvia classe CSS</button>
+            <button id="reset-ciclic" class="boto-reset">Reset</button>          
+            <div class="info-estat">
+                Estat actual: <span id="info-ciclic">1</span>
+            </div>
+        </section>
+    </main>
+    <script src="scripts/afegirclases.js"></script>
+</body>
+</html>

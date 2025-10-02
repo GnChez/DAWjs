@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <title>Encerta el número!</title>
+  </head>
+  <body>
+    <header>
+      <input
+        id="form-name"
+        type="text"
+        class="player"
+        placeholder="Posa el nom del jugador"
+      />
+
+      <input
+        id="form-number"
+        type="number"
+        class="player"
+        placeholder="Posa el número máxim"
+      />
+      <p id="text-sup">Busca un número entre 1 i ?</p>
+
+      <button id="jugar" class="btn" onclick="startGame()">Jugar!</button>
+    </header>
+    <main>
+      <h1>Busca el número!</h1>
+      <div id="usedNumbers" hidden>
+        <h3>Numeros utilitzats</h3>
+        <p id="prueba"></p>
+      </div>
+      <div class="number">?</div>
+      <div>
+        <p class="message">Pulsa el botó jugar per començar la partida...</p>
+      </div>
+    </main>
+    <article>
+      <section class="left">
+        <input type="number" class="guess" />
+        <button id="probar" class="btn" onclick="numberCheck()">Prova!</button>
+      </section>
+      <section class="right">
+        <p class="label-data">📅 Data: <span class="player-data"></span></p>
+        <p class="label-player">⭐ Nom: <span class="player-name"></span></p>
+        <p class="label-score">
+          💯 Jugades: <span class="player-score">0</span>
+        </p>
+        <p class="label-highscore">
+          🥇 Guanyades: <span class="player-highscore">0</span>
+        </p>
+      </section>
+    </article>
+    <script>
+      let tries = 9;
+      let number;
+      let games = 0;
+      let numeros = [];
+      let min;
+      let max;
+      const TEXTMESSAGE1 = "Pulsa el botó jugar per començar la partida...";
+      const TEXTMESSAGE2 = "Comencem la partida";
+      const TEXTNUMBER1 = "?";
+      const MIDDLETEXT1 = "No es un número";
+      const MIDDLETEXT2 = "L’has encertat!!";
+      const MIDDLETEXT3 = "Fora del rang";
+      const MIDDLETEXT4 = "El número secret és més gran";
+      const MIDDLETEXT5 = "El número secret és més petit";
+      const MIDDLETEXT6 = "Has perdut! El número era ";
+      const WIN_COLOR = "green";
+      const LOSE_COLOR = "#bd1212";
+
+      function NonEmptyName() {
+        name = document.getElementById("form-name").value;
+        if (name === "") {
+          alert("Si us plau, introdueix un nom per començar a jugar!");
+          return false;
+        } else {
+          console.log("Comença el joc!");
+          document.querySelector(".player-name").textContent = name;
+          return true;
+        }
+      }
+      function randomNumber(maxim) {
+        min = 1;
+        return Math.floor(Math.random() * maxim) + min;
+      }
+      function changeText() {
+        document.querySelector(".message").textContent = TEXTMESSAGE2;
+        document.querySelector(".player-name").textContent = name;
+      }
+
+      function startGame() {
+        if (!NonEmptyName()) {
+          return;
+        }
+        if (document.getElementById("form-number").value == "") {
+          max = 20;
+        } else {
+          max = Number(document.getElementById("form-number").value);
+        }
+        number = randomNumber(max);
+        console.log(number);
+        addMax(max);
+        reset();
+        changeText();
+      }
+      function addMax(max) {
+        let text_sup = document.getElementById("text-sup");
+        text_sup.textContent = text_sup.textContent.split("i ")[0] + "i " + max;
+      }
+      function reset() {
+        tries = 9;
+        document.querySelector(".number").textContent = TEXTNUMBER1;
+        document.querySelector(".guess").value = "";
+        document.querySelector(".message").textContent = TEXTMESSAGE1;
+        document.querySelector("body").style.background = "";
+        document.getElementById("probar").removeAttribute("disabled");
+        numeros = [];
+        document.getElementById("usedNumbers").hidden = true;
+        playerData();
+      }
+
+      function numberCheck() {
+        let playerGuess = document.querySelector(".guess").value;
+        let isnumber = !isNaN(parseFloat(playerGuess)) && isFinite(playerGuess);
+        let win;
+        let message = document.querySelector(".message");
+
+        playerGuess = Number(playerGuess);
+        if (tries > 0) {
+          if (!isnumber) {
+            message.textContent = MIDDLETEXT1;
+            tries--;
+          } else {
+            if (playerGuess == number) {
+              message.textContent = MIDDLETEXT2;
+              document.querySelector(".number").textContent = number;
+              win = true;
+              games++;
+              document.querySelector(".player-highscore").textContent = games;
+              document.getElementById("probar").setAttribute("disabled", "");
+            } else if (playerGuess < min || playerGuess > max) {
+              tries--;
+              message.textContent = MIDDLETEXT3;
+            } else if (playerGuess < number) {
+              tries--;
+              message.textContent = MIDDLETEXT4;
+            } else if (playerGuess > number) {
+              tries--;
+              message.textContent = MIDDLETEXT5;
+            }
+          }
+        } else {
+          message.textContent = MIDDLETEXT6 + number;
+          document.querySelector(".number").textContent = number;
+          document.getElementById("probar").setAttribute("disabled", "");
+          win = false;
+        }
+        numeros.push(playerGuess);
+        console.log(numeros);
+
+        if (win) {
+          document.querySelector("body").style.background = WIN_COLOR;
+        } else if (win === false) {
+          document.querySelector("body").style.background = LOSE_COLOR;
+        }
+        document.getElementById("usedNumbers").hidden = false;
+        document.getElementById("prueba").textContent = numeros.toString();
+
+        document.querySelector(".player-score").textContent = tries + 1;
+      }
+      function playerData() {
+        let data = new Date();
+        let mes = data.getMonth();
+        let dia = data.getDate();
+        let any = data.getFullYear();
+        document.querySelector(".player-data").textContent =
+          dia + "/" + (mes + 1) + "/" + any;
+        document.querySelector(".player-score").textContent = tries + 1;
+      }
+      window.onload(
+        document.getElementById("probar").setAttribute("disabled","")
+      )
+    </script>
+  </body>
+</html>
