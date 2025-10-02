@@ -32,8 +32,11 @@ container.addEventListener("click", (event) => {
   if (event.target.classList.contains("boto-dlt")) {
     event.target.parentElement.remove();
   }
+  if(document.getElementById("container").textContent==""){
+    contador=1;
+    
+  };
 
-  console.log(event.target.parentElement.innerHTML.trim());
 });
 
 function crearTasca() {
