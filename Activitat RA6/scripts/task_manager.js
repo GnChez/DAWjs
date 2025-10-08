@@ -14,7 +14,9 @@ add_boton.addEventListener("click", () => {
 });
 
 delete_boton.addEventListener("click", () => {
-  container.innerHTML = "";
+  while(container.firstChild){
+    container.removeChild(container.firstChild);
+  }
   contador = 1;
 });
 
@@ -27,7 +29,6 @@ tasca.addEventListener("keypress", (e) => {
     crearTasca();
   }
 });
-
 container.addEventListener("click", (event) => {
   if (event.target.classList.contains("boto-dlt")) {
     event.target.parentElement.remove();
@@ -51,7 +52,9 @@ function crearTasca() {
 
   newDiv.appendChild(newH3);
   newDiv.appendChild(newP);
+
   let newBoton = document.createElement("button");
+
   let textButton = document.createTextNode("Borrar");
   newBoton.classList.add("boto-dlt");
   newBoton.appendChild(textButton);

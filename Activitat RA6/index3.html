@@ -73,35 +73,36 @@
       let area = document.getElementById("inter-area");
       let text_section = document.getElementById("text-section");
 
-      function addText(text){
-        text_section.insertAdjacentHTML("beforeend", text)
+      function addText(text) {
+        text_section.insertAdjacentHTML("beforeend", text);
       }
       boton_double.addEventListener("dblclick", () => {
         alert("Has fet doble clic el botó!");
-        addText("Has fet doble clic el botó!<br>")
+        addText("Has fet doble clic el botó!<br>");
       });
       visibility.addEventListener("click", () => {
-        alert("Has fet clic l'ull!");        
-        addText("Has fet clic l'ull!<br>")
+        alert("Has fet clic l'ull!");
+        addText("Has fet clic l'ull!<br>");
       });
       input_text.addEventListener("input", (e) => {
         alert(`El valor ha cambiar a: ${e.target.value}`);
-        addText(`El valor ha cambiar a: ${e.target.value}<br>`)
+        addText(`El valor ha cambiar a: ${e.target.value}<br>`);
       });
       input_text.addEventListener("keydown", (e) => {
         if (e.key == "Escape") {
           alert("No pots utilitzar la tecla Escape dins del formulari!");
-          addText("No pots utilitzar la tecla Escape dins del formulari!<br>")
+          addText("No pots utilitzar la tecla Escape dins del formulari!<br>");
         }
       });
+
       area.addEventListener("mousemove", () => {
         alert("Estàs sobre l'àrea interactiva!");
-        addText("Estàs sobre l'àrea interactiva!<br>")
+        addText("Estàs sobre l'àrea interactiva!<br>");
       });
-      mostra.addEventListener("click", () => {
+      mostra.addEventListener("mouseenter", () => {
         text_section.hidden = false;
       });
-      amaga.addEventListener("click", () => {
+      amaga.addEventListener("mouseenter", () => {
         text_section.hidden = true;
       });
       /*
